@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { LayoutDashboard, Package, FileText, CreditCard, LifeBuoy, LogOut, CheckCircle2, ChevronRight } from 'lucide-react';
+import logoIcon from '../assets/logo-icon.png';
+import logoText from '../assets/logo-text.png';
 
 export default function ClientDashboard() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isClientLoggedIn');
@@ -26,17 +29,15 @@ export default function ClientDashboard() {
     { icon: LifeBuoy, label: 'Support', path: '/client-dashboard/support' },
   ];
 
-  const activePath = '/client-dashboard'; // Hardcoded for this simple single-view for now
+  const activePath = pathname;
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Sidebar */}
       <div className="w-full md:w-64 bg-surface-container/30 border-r border-white/5 flex flex-col p-6 h-auto md:h-screen sticky top-0 md:flex-shrink-0 z-10 transition-colors">
         <Link to="/" className="flex items-center gap-2 mb-12">
-          <div className="w-8 h-8 rounded bg-white text-black flex items-center justify-center font-display font-bold text-lg leading-none tracking-tighter">
-            KB
-          </div>
-          <span className="font-display font-bold text-xl text-white tracking-tight">Growth</span>
+          <img src={logoIcon} alt="" className="h-9 w-auto" />
+          <img src={logoText} alt="Socialio" className="h-4 w-auto" />
         </Link>
 
         <nav className="flex-1 space-y-2">

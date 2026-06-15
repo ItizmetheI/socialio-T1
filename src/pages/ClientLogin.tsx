@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Lock, Mail, Quote, LayoutDashboard, Zap } from 'lucide-react';
+import logoIcon from '../assets/logo-icon.png';
+import logoText from '../assets/logo-text.png';
 
 export default function ClientLogin() {
   const [email, setEmail] = useState('');
@@ -23,10 +25,8 @@ export default function ClientLogin() {
       {/* Left side: Form */}
       <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-16 md:px-16 lg:px-24 z-10">
         <Link to="/" className="flex items-center gap-2 mb-16 md:absolute md:top-8 md:left-12">
-          <div className="w-8 h-8 rounded bg-white text-black flex items-center justify-center font-display font-bold text-lg leading-none tracking-tighter">
-            KB
-          </div>
-          <span className="font-display font-bold text-xl text-white tracking-tight">Growth</span>
+          <img src={logoIcon} alt="" className="h-9 w-auto" />
+          <img src={logoText} alt="Socialio" className="h-4 w-auto" />
         </Link>
         
         <motion.div

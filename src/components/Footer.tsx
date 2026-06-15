@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { servicesData } from "../data/services";
 import { Twitter, Linkedin, Instagram, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
-import logo from "../assets/logo.png";
+import logoIcon from "../assets/logo-icon.png";
+import logoText from "../assets/logo-text.png";
 
 export default function Footer() {
   const socialCategories = servicesData.filter(s => s.category === "Social Media");
@@ -24,7 +25,10 @@ export default function Footer() {
             
             {/* Brand & Newsletter */}
             <div className="lg:col-span-2">
-                <img src={logo} alt="Socialio" className="h-10 w-auto mb-6" />
+                <div className="flex items-center gap-2 mb-6">
+                  <img src={logoIcon} alt="" className="h-8 w-auto" />
+                  <img src={logoText} alt="Socialio" className="h-3.5 w-auto" />
+                </div>
                 <p className="font-sans text-on-surface-variant max-w-sm mb-8">
                   Precision marketing for high-growth teams. We turn digital attention into enterprise value.
                 </p>
@@ -98,12 +102,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-on-surface-variant">
-               <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-400" /> Secure Checkout</span>
-               <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-400" /> Vetted Agency</span>
-            </div>
-            
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-center gap-6 px-4">
             <div className="flex flex-wrap items-center gap-6 text-xs text-on-surface-variant font-sans">
                 <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                 <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

@@ -4,7 +4,6 @@ import { CheckCircle2, ChevronDown, ArrowLeft, ShoppingCart, ShieldCheck, Star, 
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { useCart } from "../context/CartContext";
-import CustomPlayer from "../components/CustomPlayer";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
 
 export default function ServiceDetail() {

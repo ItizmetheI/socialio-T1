@@ -4,7 +4,8 @@ import { useCart } from "../context/CartContext";
 import CartDrawer from "./CartDrawer";
 import { useState, useEffect } from "react";
 import { servicesData } from "../data/services";
-import logo from "../assets/logo.png";
+import logoIcon from "../assets/logo-icon.png";
+import logoText from "../assets/logo-text.png";
 
 export default function NavBar() {
   const { pathname } = useLocation();
@@ -37,8 +38,9 @@ export default function NavBar() {
         onMouseLeave={() => setActiveDropdown(null)}
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="Socialio" className="h-14 w-auto" />
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoIcon} alt="" className="h-9 w-auto" />
+            <img src={logoText} alt="Socialio" className="h-4 w-auto" />
           </Link>
           <div className="hidden md:flex items-center gap-8 relative">
             <Link to="/" className={isActive("/")}>Home</Link>
