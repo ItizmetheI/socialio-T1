@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { servicesData } from "../data/services";
-import { Twitter, Linkedin, Instagram, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Instagram, Facebook, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import logoIcon from "../assets/logo-icon.png";
 import logoText from "../assets/logo-text.png";
@@ -58,9 +58,8 @@ export default function Footer() {
                    )}
                 </div>
                 <div className="flex items-center gap-4 text-on-surface-variant">
-                   <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
-                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Linkedin className="w-5 h-5" /></a>
-                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
+                   <a href="https://www.facebook.com/share/17oA4Peihv/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
+                   <a href="https://www.instagram.com/getsocialio?igsh=MTZ2Y21ucDN1dmRvdg==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
                 </div>
             </div>
 

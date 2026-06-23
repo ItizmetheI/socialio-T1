@@ -39,7 +39,7 @@ export default function Privacy() {
             <section>
               <h2 className="text-xl font-bold text-white mb-4">4. Contact Us</h2>
               <p className="mb-4">
-                If you have any questions about this Privacy Policy, please contact us at privacy@socialio.com.
+                If you have any questions about this Privacy Policy, please contact us at support@socialio.io.
               </p>
             </section>
           </div>

@@ -46,7 +46,7 @@ export default function Terms() {
             <section>
               <h2 className="text-xl font-bold text-white mb-4">5. Contact Information</h2>
               <p className="mb-4">
-                For any questions regarding these Terms, please contact us at legal@socialio.com.
+                For any questions regarding these Terms, please contact us at support@socialio.io.
               </p>
             </section>
           </div>
