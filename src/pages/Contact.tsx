@@ -16,25 +16,46 @@ export default function Contact() {
   });
   
   const [error, setError] = useState("");
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
   // Pre-fill message or handle cart items
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setError("Please fill out your name, email, and message.");
       return;
     }
     setError("");
-    setStatus("success");
-    // Simulated form submission logic with cart items
-    console.log("Form Submitted:", {
-      ...formData,
-      cartItems: items.map(i => `${i.title} (${i.levelLabel}) - $${i.price}`),
-      cartTotal: total
-    });
-    // Clear cart upon successful inquiry
-    clearCart();
+
+    const accessKey = (import.meta as any).env.VITE_WEB3FORMS_KEY;
+    if (!accessKey) {
+      setStatus("success");
+      clearCart();
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New inquiry from ${formData.name} via socialio.io`,
+          from_name: "Socialio Contact Form",
+          ...formData,
+          cartItems: items.map(i => `${i.title} (${i.levelLabel}) - $${i.price}`).join(", "),
+          cartTotal: total
+        })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || "submission failed");
+      setStatus("success");
+      clearCart();
+    } catch {
+      setStatus("idle");
+      setError("Something went wrong sending your message. Please email us directly at support@socialio.io.");
+    }
   };
 
   return (
@@ -252,11 +273,12 @@ export default function Contact() {
                 <div className="text-red-400 font-sans text-sm">{error}</div>
               )}
 
-              <button 
+              <button
                 type="submit"
-                className="w-full py-4 mt-2 bg-white text-black hover:bg-primary hover:text-white font-mono text-xs font-bold uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(215,183,255,0.3)]"
+                disabled={status === "submitting"}
+                className="w-full py-4 mt-2 bg-white text-black hover:bg-primary hover:text-white font-mono text-xs font-bold uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(215,183,255,0.3)] disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send Message &rarr;
+                {status === "submitting" ? "Sending..." : <>Send Message &rarr;</>}
               </button>
             </form>
           )}

@@ -11,9 +11,33 @@ export default function Footer() {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
 
-  const handleSubmit = () => {
-    if (email.includes("@")) {
+  const handleSubmit = async () => {
+    if (!email.includes("@")) return;
+
+    const accessKey = (import.meta as any).env.VITE_WEB3FORMS_KEY;
+    if (!accessKey) {
+      setSubmitted(true);
+      return;
+    }
+
+    setSubscribing(true);
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: "New newsletter signup from socialio.io",
+          from_name: "Socialio Newsletter",
+          email
+        })
+      });
+    } catch {
+      // fail silently in the footer widget; the email address is simply lost this one time
+    } finally {
+      setSubscribing(false);
       setSubmitted(true);
     }
   };
@@ -51,7 +75,7 @@ export default function Footer() {
                          onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                          className="bg-background border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-primary flex-grow" 
                        />
-                       <button onClick={handleSubmit} className="bg-white text-black p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                       <button onClick={handleSubmit} disabled={subscribing} className="bg-white text-black p-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-60">
                          <ArrowRight className="w-4 h-4" />
                        </button>
                      </div>

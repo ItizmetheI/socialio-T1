@@ -2,8 +2,40 @@ import { motion } from "motion/react";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { blogImages } from "../data/media";
+import React, { useState } from "react";
 
 export default function Blog() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail.includes("@")) return;
+
+    const accessKey = (import.meta as any).env.VITE_WEB3FORMS_KEY;
+    if (!accessKey) {
+      setNewsletterStatus("success");
+      return;
+    }
+
+    setNewsletterStatus("submitting");
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: "New newsletter signup from socialio.io/blog",
+          from_name: "Socialio Newsletter",
+          email: newsletterEmail
+        })
+      });
+    } catch {
+      // fail silently; treat as success from the visitor's perspective
+    }
+    setNewsletterStatus("success");
+  };
+
   const posts = [
     {
       id: 1,
@@ -170,18 +202,26 @@ export default function Blog() {
           </div>
           
           <div className="w-full md:w-auto flex-shrink-0 relative z-10">
-            <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="your@email.com" 
-                className="bg-surface-container/80 border border-outline-variant/30 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-primary min-w-[250px]"
-                required
-              />
-               <button type="submit" className="primary-button-glow font-bold text-on-primary-fixed px-6 py-3 rounded-xl whitespace-nowrap">
-                Subscribe
-              </button>
-            </form>
-            <p className="text-[11px] text-on-surface-variant mt-3 text-center sm:text-left">No spam. Unsubscribe anytime.</p>
+            {newsletterStatus === "success" ? (
+              <p className="font-bold text-white bg-primary/10 px-5 py-3 rounded-xl text-center sm:text-left">You're in. Growth incoming.</p>
+            ) : (
+              <>
+                <form className="flex flex-col sm:flex-row gap-3" onSubmit={handleNewsletterSubmit}>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="bg-surface-container/80 border border-outline-variant/30 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-primary min-w-[250px]"
+                    required
+                  />
+                   <button type="submit" disabled={newsletterStatus === "submitting"} className="primary-button-glow font-bold text-on-primary-fixed px-6 py-3 rounded-xl whitespace-nowrap disabled:opacity-60">
+                    {newsletterStatus === "submitting" ? "Subscribing..." : "Subscribe"}
+                  </button>
+                </form>
+                <p className="text-[11px] text-on-surface-variant mt-3 text-center sm:text-left">No spam. Unsubscribe anytime.</p>
+              </>
+            )}
           </div>
         </motion.div>
 
