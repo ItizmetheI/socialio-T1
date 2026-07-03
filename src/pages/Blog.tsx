@@ -62,7 +62,7 @@ export default function Blog() {
   ];
 
   return (
-    <div className="pt-32 pb-24 relative min-h-screen">
+    <div className="pt-32 pb-24 relative min-h-screen overflow-hidden">
       <div className="max-w-container-max mx-auto px-margin-desktop relative z-10 flex flex-col items-center">
         
         {/* Header Section */}

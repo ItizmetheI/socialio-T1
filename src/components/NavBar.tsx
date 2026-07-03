@@ -33,8 +33,8 @@ export default function NavBar() {
 
   return (
     <>
-      <nav 
-        className="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]"
+      <nav
+        className="fixed top-0 w-full z-40 bg-background/90 backdrop-blur-md border-b border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] [transform:translateZ(0)]"
         onMouseLeave={() => setActiveDropdown(null)}
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">

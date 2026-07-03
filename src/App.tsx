@@ -101,7 +101,7 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <ReactLenis root>
+    <ReactLenis root options={{ duration: 0.8, wheelMultiplier: 1, touchMultiplier: 2, syncTouch: false }}>
       <BrowserRouter>
         <CartProvider>
           <ScrollToTop />

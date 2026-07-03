@@ -230,12 +230,17 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  overscroll-behavior-x: none;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-on-surface);
   overflow-x: hidden;
+  width: 100%;
+  overscroll-behavior-x: none;
   font-family: var(--font-body-md), sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
