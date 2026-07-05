@@ -4,6 +4,7 @@ import { CheckCircle2, ChevronDown, ArrowLeft, ShoppingCart, ShieldCheck, Star, 
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { useCart } from "../context/CartContext";
+import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
 
 export default function ServiceDetail() {
@@ -127,7 +128,7 @@ export default function ServiceDetail() {
                     {showcaseItems.slice(0, 4).map((item: any, i: number) => (
                       <div key={i} className={`rounded-2xl overflow-hidden relative border border-white/5 bg-black ${item.aspectRatio === '9/16' ? 'aspect-[9/16]' : item.aspectRatio === '16/9' ? 'aspect-video' : 'aspect-square'}`}>
                         {item.type === 'video'
-                          ? <video src={item.url} autoPlay muted loop playsInline preload="metadata" onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
+                          ? <AutoplayVideo src={item.url} preload="metadata" onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
                           : <img src={item.url} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
                         }
                       </div>
@@ -397,7 +398,7 @@ export default function ServiceDetail() {
                         <div key={idx} className={`w-56 sm:w-64 rounded-2xl overflow-hidden bg-background/50 border border-white/5 relative group flex-shrink-0 shadow-lg ${item.aspectRatio === '16/9' ? 'aspect-video' : item.aspectRatio === '1/1' ? 'aspect-square' : 'aspect-[9/16]'}`}>
                            <div className="absolute inset-0 z-0">
                              {item.type === 'video'
-                               ? <video src={item.url} autoPlay muted loop playsInline preload="metadata" onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="w-full h-full object-cover" />
+                               ? <AutoplayVideo src={item.url} preload="metadata" onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="w-full h-full object-cover" />
                                : <img src={item.url} alt="" className="w-full h-full object-cover" />
                              }
                            </div>

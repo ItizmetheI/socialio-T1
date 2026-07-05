@@ -4,6 +4,7 @@ import { BarChart3, Route, MousePointerClick, Play, Sparkles, Image, Video, User
 import { motion, useInView } from "motion/react";
 import { servicesData } from "../data/services";
 import PricingCard from "../components/PricingCard";
+import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
 
 function useAnimatedCounter(start: number, end: number, duration: number, suffix = "", inView = true) {
@@ -104,12 +105,8 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ item, columnIndex, index })
   if (item.type === 'video') {
     return (
       <div className="w-full aspect-[9/16] bg-[#1a1a1a] rounded-[14px] shrink-0 relative group shadow-[0_4px_20px_rgba(0,0,0,0.10)] overflow-hidden">
-        <video
+        <AutoplayVideo
           src={item.url}
-          autoPlay
-          muted
-          loop
-          playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -518,7 +515,7 @@ export default function Home() {
                   {socialImages.map((item) => (
                     <div key={item.id} className="rounded-xl overflow-hidden relative group/img aspect-square border border-white/5">
                       {item.type === "video"
-                        ? <video src={item.url} autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+                        ? <AutoplayVideo src={item.url} preload="auto" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                         : <img src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Social post" />
                       }
                     </div>
@@ -546,9 +543,8 @@ export default function Home() {
                <div className="grid grid-cols-2 gap-4">
                   {shortFormVideos.map((item, i) => (
                     <div key={i} className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black">
-                      <video
+                      <AutoplayVideo
                         src={item.url}
-                        autoPlay muted loop playsInline
                         preload="auto"
                         className="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-105"
                       />
@@ -603,9 +599,8 @@ export default function Home() {
                <div className="grid grid-cols-3 gap-4">
                  {[...ugcVideos, ...socialImages.filter((i: any) => i.type === 'video')].slice(0, 3).map((item: any, i: number) => (
                    <div key={i} className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black">
-                     <video
+                     <AutoplayVideo
                        src={item.url}
-                       autoPlay muted loop playsInline
                        preload="metadata"
                        onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }}
                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-105"
