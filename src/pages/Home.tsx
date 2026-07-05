@@ -7,6 +7,8 @@ import PricingCard from "../components/PricingCard";
 import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
 
+const socialImageOnly = socialImages.filter((i: any) => i.type !== 'video');
+
 function useAnimatedCounter(start: number, end: number, duration: number, suffix = "", inView = true) {
   const [value, setValue] = useState(start);
 
@@ -85,12 +87,12 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ item, columnIndex, index })
         <div className="absolute inset-0 flex flex-col p-3 pt-6">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-5 h-5 rounded-full overflow-hidden shrink-0">
-               <img src={socialImages[0].url} alt="" className="w-full h-full object-cover" />
+               <img src={socialImageOnly[0].url} alt="" className="w-full h-full object-cover" />
             </div>
             <div className="text-[10px] font-bold text-white">Socialio</div>
           </div>
           <div className="flex-grow rounded-lg overflow-hidden relative">
-             <img src={socialImages[index % socialImages.length].url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+             <img src={socialImageOnly[index % socialImageOnly.length].url} alt="" className="absolute inset-0 w-full h-full object-cover" />
           </div>
           <div className="flex items-center gap-2 mt-2">
              <div className="w-3 h-3 rounded-full border border-white/50"></div>
@@ -107,7 +109,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ item, columnIndex, index })
       <div className="w-full aspect-[9/16] bg-[#1a1a1a] rounded-[14px] shrink-0 relative group shadow-[0_4px_20px_rgba(0,0,0,0.10)] overflow-hidden">
         <AutoplayVideo
           src={item.url}
-          preload="auto"
+         
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
@@ -515,7 +517,7 @@ export default function Home() {
                   {socialImages.map((item) => (
                     <div key={item.id} className="rounded-xl overflow-hidden relative group/img aspect-square border border-white/5">
                       {item.type === "video"
-                        ? <AutoplayVideo src={item.url} preload="auto" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+                        ? <AutoplayVideo src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                         : <img src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Social post" />
                       }
                     </div>
@@ -545,7 +547,7 @@ export default function Home() {
                     <div key={i} className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black">
                       <AutoplayVideo
                         src={item.url}
-                        preload="auto"
+                       
                         className="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-105"
                       />
                     </div>
@@ -601,7 +603,7 @@ export default function Home() {
                    <div key={i} className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black">
                      <AutoplayVideo
                        src={item.url}
-                       preload="metadata"
+                      
                        onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }}
                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-105"
                      />

@@ -49,7 +49,7 @@ export default function Examples() {
         {filteredItems.map((item) => (
           <div key={item.id} className={`break-inside-avoid rounded-2xl overflow-hidden relative group bg-surface-container ${item.aspectRatio === '16/9' ? 'aspect-video' : item.aspectRatio === '1/1' ? 'aspect-square' : 'aspect-[9/16]'}`}>
              {item.type === 'video'
-               ? <AutoplayVideo src={item.url} preload="metadata" onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="w-full h-full object-cover transition-transform duration-700" />
+               ? <AutoplayVideo src={item.url} onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="w-full h-full object-cover transition-transform duration-700" />
                : <img src={item.url} alt={`${item.category} example`} className="w-full h-full object-cover transition-transform duration-700" loading="lazy" />
              }
           </div>
