@@ -4,9 +4,8 @@
  */
 
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ReactLenis } from 'lenis/react';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Pricing from './pages/Pricing';
@@ -104,13 +103,7 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  // Lenis re-implements scrolling in JS, which always loses to native OS
-  // momentum scrolling on touch devices. Only use it for desktop wheel smoothing.
-  const [isTouchDevice] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
-  );
-
-  const app = (
+  return (
     <BrowserRouter>
       <CartProvider>
         <ScrollToTop />
@@ -119,15 +112,5 @@ export default function App() {
         </MainLayout>
       </CartProvider>
     </BrowserRouter>
-  );
-
-  if (isTouchDevice) {
-    return app;
-  }
-
-  return (
-    <ReactLenis root options={{ duration: 0.8, wheelMultiplier: 1, touchMultiplier: 2, syncTouch: false }}>
-      {app}
-    </ReactLenis>
   );
 }
