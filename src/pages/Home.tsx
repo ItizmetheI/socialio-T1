@@ -699,9 +699,9 @@ export default function Home() {
                {/* Tech Dial Gauge */}
                <div className="relative w-64 h-64 rounded-[2rem] flex flex-col items-center justify-center mx-auto">
                   <div className="absolute inset-0 bg-primary/10 rounded-[2rem] blur-[40px] scale-75 -z-10 animate-pulse" />
-                  <svg className="absolute inset-0 w-full h-full -rotate-[135deg]" viewBox="0 0 200 200">
-                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-white/5" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="133.5" />
-                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-primary transition-all duration-200 ease-linear" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={534 - 400.5 * (guaranteeDay / 14)} />
+                  <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 200 200">
+                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-white/5" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="0" />
+                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-primary transition-all duration-200 ease-linear" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={534 * (1 - guaranteeDay / 14)} />
                   </svg>
                   <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wide mb-2 shadow-sm animate-pulse text-center leading-tight px-8 w-full">Money Back Guaranteed</span>
                   <span className="font-display text-8xl md:text-9xl font-bold text-white tracking-tighter shadow-lg">{guaranteeDay}</span>
