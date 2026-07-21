@@ -697,7 +697,7 @@ export default function Home() {
             </div>
                     <div className="w-full max-w-[280px] shrink-0 z-10 relative hidden md:block">
                {/* Tech Dial Gauge */}
-               <div className="relative w-64 h-64 rounded-[2rem] flex flex-col items-center justify-center bg-surface-container-lowest shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] border border-white/5 mx-auto">
+               <div className="relative w-64 h-64 rounded-[2rem] flex flex-col items-center justify-center mx-auto">
                   <div className="absolute inset-0 bg-primary/10 rounded-[2rem] blur-[40px] scale-75 -z-10 animate-pulse" />
                   <svg className="absolute inset-0 w-full h-full -rotate-[135deg]" viewBox="0 0 200 200">
                      <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-white/5" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="133.5" />
