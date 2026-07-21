@@ -701,9 +701,9 @@ export default function Home() {
                   <div className="absolute inset-0 bg-primary/10 rounded-[2rem] blur-[40px] scale-75 -z-10 animate-pulse" />
                   <svg className="absolute inset-0 w-full h-full -rotate-[135deg]" viewBox="0 0 200 200">
                      <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-white/5" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="133.5" />
-                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-primary transition-all duration-[1500ms] ease-out" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={guaranteeInView ? 267 : 534} />
+                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-primary transition-all duration-200 ease-linear" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={534 - 400.5 * (guaranteeDay / 14)} />
                   </svg>
-                  <span className="font-mono text-xs text-on-surface-variant uppercase tracking-widest mb-2 shadow-sm animate-pulse">Sprint Day</span>
+                  <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wide mb-2 shadow-sm animate-pulse text-center leading-tight px-8 w-full">Money Back Guaranteed</span>
                   <span className="font-display text-8xl md:text-9xl font-bold text-white tracking-tighter shadow-lg">{guaranteeDay}</span>
                   
                   <div className="absolute -bottom-4 px-4 py-2 bg-background border border-white/10 rounded-full flex items-center gap-2 shadow-xl">
