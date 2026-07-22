@@ -168,7 +168,7 @@ export default function Blog() {
                className="glass-card rounded-[1.5rem] border border-outline-variant/30 overflow-hidden group hover:border-primary/50 transition-colors flex flex-col"
              >
                 <div className="aspect-[16/10] overflow-hidden relative">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img src={post.image} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-caption text-white font-medium border border-white/10">
                       {post.category}

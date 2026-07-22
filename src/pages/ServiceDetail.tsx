@@ -137,7 +137,7 @@ export default function ServiceDetail() {
                       <div key={i} className={`rounded-2xl overflow-hidden relative border border-white/5 bg-black ${item.aspectRatio === '9/16' ? 'aspect-[9/16]' : item.aspectRatio === '16/9' ? 'aspect-video' : 'aspect-square'}`}>
                         {item.type === 'video'
                           ? <AutoplayVideo src={item.url} onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
-                          : <img src={item.url} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
+                          : <img src={item.url} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-700" />
                         }
                       </div>
                     ))}
@@ -407,7 +407,7 @@ export default function ServiceDetail() {
                            <div className="absolute inset-0 z-0">
                              {item.type === 'video'
                                ? <AutoplayVideo src={item.url} onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).currentTime = 0.1; }} className="w-full h-full object-cover" />
-                               : <img src={item.url} alt="" className="w-full h-full object-cover" />
+                               : <img src={item.url} alt="" loading="lazy" className="w-full h-full object-cover" />
                              }
                            </div>
                         </div>

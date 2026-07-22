@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Home from './pages/Home';
@@ -26,6 +26,7 @@ import Reviews from './pages/Reviews';
 import Industries from './pages/Industries';
 import ClientLogin from './pages/ClientLogin';
 import ClientDashboard from './pages/ClientDashboard';
+import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -95,7 +96,7 @@ function AnimatedRoutes() {
               <Route path="/client-dashboard/*" element={<ClientDashboard />} />
             </>
           )}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
     </AnimatePresence>

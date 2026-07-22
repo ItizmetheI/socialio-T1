@@ -191,9 +191,10 @@ export default function About() {
                   className="group"
                 >
                   <div className="relative aspect-[3/4] mb-6 overflow-hidden rounded-2xl bg-surface-container">
-                     <img 
-                       src={member.image} 
-                       alt={member.name} 
+                     <img
+                       src={member.image}
+                       alt={member.name}
+                       loading="lazy"
                        className="w-full h-full object-cover grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700 group-hover:scale-105"
                      />
                      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

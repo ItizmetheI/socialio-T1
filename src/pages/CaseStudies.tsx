@@ -144,7 +144,7 @@ export default function CaseStudies() {
               >
                  {/* Visual Side */}
                  <div className="lg:w-2/5 relative overflow-hidden min-h-[300px] lg:min-h-full bg-black/40">
-                    <img src={study.image} alt={study.headline} className="absolute inset-0 w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-700 opacity-60" />
+                    <img src={study.image} alt={study.headline} loading="lazy" className="absolute inset-0 w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-700 opacity-60" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     
                     <div className="absolute top-6 left-6 flex gap-2">
@@ -155,7 +155,7 @@ export default function CaseStudies() {
 
                     <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                        <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md p-2 pl-2 pr-4 rounded-full border border-white/10">
-                          <img src={study.logo} alt={study.industry} className="w-8 h-8 rounded-full border border-white/20" />
+                          <img src={study.logo} alt={study.industry} loading="lazy" className="w-8 h-8 rounded-full border border-white/20" />
                           <span className="font-sans text-sm font-bold text-white">{study.industry}</span>
                        </div>
                     </div>

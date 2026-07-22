@@ -524,7 +524,7 @@ export default function Home() {
                     <div key={item.id} className="rounded-xl overflow-hidden relative group/img aspect-square border border-white/5">
                       {item.type === "video"
                         ? <AutoplayVideo src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        : <img src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Social post" />
+                        : <img src={item.url} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Social post" loading="lazy" />
                       }
                     </div>
                   ))}
@@ -581,7 +581,7 @@ export default function Home() {
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {blogImages.map((item: any, i: number) => (
                      <div key={i} className="rounded-xl overflow-hidden relative group/img aspect-video border border-white/5 bg-black">
-                        <img src={item.url} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Blog Image" />
+                        <img src={item.url} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="Blog Image" loading="lazy" />
                      </div>
                   ))}
                </div>
