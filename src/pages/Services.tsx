@@ -16,8 +16,15 @@ import {
 } from "lucide-react";
 import { servicesData } from "../data/services";
 import { motion } from "motion/react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Services() {
+  useSEO({
+    title: "Services",
+    description: "Productized social media posts, short-form video, UGC, SEO blog content, and backlinks — priced simply, delivered fast.",
+    path: "/services",
+  });
+
   const iconMap: Record<string, any> = {
     "social-media-posts": { icon: <PenTool className="w-6 h-6" />, bg: "bg-blue-500/10", text: "text-blue-500" },
     "short-form-videos": { icon: <MonitorPlay className="w-6 h-6" />, bg: "bg-purple-500/10", text: "text-purple-500" },

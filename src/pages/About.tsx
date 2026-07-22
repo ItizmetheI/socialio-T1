@@ -1,8 +1,14 @@
 import { motion } from "motion/react";
 import { Zap, ShieldCheck, BarChart3, Users, Globe, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSEO } from "../hooks/useSEO";
 
 export default function About() {
+  useSEO({
+    title: "About Us",
+    description: "Socialio productizes the marketing agency model — meet the team behind the fast, fixed-price growth engine for ambitious brands.",
+    path: "/about",
+  });
   const values = [
     {
       icon: <Zap className="w-6 h-6 text-primary" />,

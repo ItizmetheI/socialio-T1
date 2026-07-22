@@ -1,6 +1,13 @@
 import { motion } from "motion/react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Privacy() {
+  useSEO({
+    title: "Privacy Policy",
+    description: "Socialio's privacy policy — how we collect, use, and protect your information.",
+    path: "/privacy",
+  });
+
   return (
     <div className="pt-32 pb-24 relative min-h-screen">
       <div className="max-w-3xl mx-auto px-margin-desktop relative z-10">

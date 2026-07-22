@@ -1,8 +1,15 @@
 import { ShoppingBag, MonitorPlay, MapPin, Activity, UserSquare2, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Industries() {
+  useSEO({
+    title: "Industries We Serve",
+    description: "See how Socialio drives growth across SaaS, e-commerce, health & wellness, real estate, travel, and professional services.",
+    path: "/industries",
+  });
+
   const industries = [
     { name: "SaaS & Tech", icon: MonitorPlay, tag: "Content + SEO focus", desc: "Content that educates and converts. Blog posts, LinkedIn content, and SEO strategies that compound MRR." },
     { name: "Health & Wellness", icon: Activity, tag: "Trust-first content", desc: "Trust-first content strategies. UGC and educational posts that build credibility before the ask." },

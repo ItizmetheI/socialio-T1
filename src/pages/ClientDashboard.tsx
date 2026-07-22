@@ -4,8 +4,16 @@ import { motion } from 'motion/react';
 import { LayoutDashboard, Package, FileText, CreditCard, LifeBuoy, LogOut, CheckCircle2, ChevronRight } from 'lucide-react';
 import logoIcon from '../assets/logo-icon.png';
 import logoText from '../assets/logo-text.png';
+import { useSEO } from '../hooks/useSEO';
 
 export default function ClientDashboard() {
+  useSEO({
+    title: "Client Dashboard",
+    description: "Your Socialio client dashboard.",
+    path: "/client-dashboard",
+    noindex: true,
+  });
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

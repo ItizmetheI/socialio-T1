@@ -1,7 +1,14 @@
 import { Star, CheckCircle, ShieldCheck } from "lucide-react";
 import { useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Reviews() {
+  useSEO({
+    title: "Client Reviews",
+    description: "Read verified reviews from companies successfully scaling their content and growth with Socialio.",
+    path: "/reviews",
+  });
+
   const [filterType, setFilterType] = useState("All");
 
   const reviews = [

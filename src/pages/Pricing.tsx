@@ -4,8 +4,15 @@ import React from "react";
 import PricingCard from "../components/PricingCard";
 import { BadgeCheck } from "lucide-react";
 import { motion } from "motion/react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Pricing() {
+  useSEO({
+    title: "Pricing",
+    description: "Simple, transparent pricing for social media posts, short-form video, blog & SEO, and more. No long-term contracts, cancel anytime.",
+    path: "/pricing",
+  });
+
   return (
     <>
       <div className="mesh-gradient-pricing fixed top-0 left-0 w-full h-full -z-10"></div>

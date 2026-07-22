@@ -4,8 +4,16 @@ import { motion } from 'motion/react';
 import { ArrowRight, Lock, Mail, Quote, LayoutDashboard, Zap } from 'lucide-react';
 import logoIcon from '../assets/logo-icon.png';
 import logoText from '../assets/logo-text.png';
+import { useSEO } from '../hooks/useSEO';
 
 export default function ClientLogin() {
+  useSEO({
+    title: "Client Login",
+    description: "Sign in to your Socialio client portal.",
+    path: "/client-login",
+    noindex: true,
+  });
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();

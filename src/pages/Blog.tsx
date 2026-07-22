@@ -3,8 +3,15 @@ import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { blogImages } from "../data/media";
 import React, { useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Blog() {
+  useSEO({
+    title: "The Growth Log — Blog",
+    description: "Tactical teardowns, frameworks, and actionable essays on scaling revenue through content and growth marketing.",
+    path: "/blog",
+  });
+
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "submitting" | "success">("idle");
 

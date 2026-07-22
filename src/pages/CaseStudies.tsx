@@ -3,8 +3,15 @@ import { ArrowRight, BarChart3, Users, DollarSign, Target, ArrowUpRight, CheckCi
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function CaseStudies() {
+  useSEO({
+    title: "Case Studies",
+    description: "Real results from real clients — see how Socialio's content and growth systems drove measurable revenue across SaaS, e-commerce, and more.",
+    path: "/case-studies",
+  });
+
   const [activeFilter, setActiveFilter] = useState("All");
   
   const filters = ["All", "SEO", "Social Media", "Paid Ads"];

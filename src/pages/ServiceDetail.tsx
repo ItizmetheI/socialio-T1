@@ -6,6 +6,7 @@ import { motion, useInView } from "motion/react";
 import { useCart } from "../context/CartContext";
 import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
+import { useSEO } from "../hooks/useSEO";
 
 export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +16,13 @@ export default function ServiceDetail() {
   const { addToCart, setIsCartOpen } = useCart();
   const proofRef = useRef(null);
   const isProofInView = useInView(proofRef, { once: true });
+
+  useSEO({
+    title: service ? service.title : "Service Not Found",
+    description: service ? service.longDescription : "This service could not be found.",
+    path: `/service/${id ?? ""}`,
+    noindex: !service,
+  });
 
   if (!service) {
     return (

@@ -6,6 +6,7 @@ import { servicesData } from "../data/services";
 import PricingCard from "../components/PricingCard";
 import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
+import { useSEO } from "../hooks/useSEO";
 
 const socialImageOnly = socialImages.filter((i: any) => i.type !== 'video');
 
@@ -187,6 +188,11 @@ function HeroCarousel() {
 }
 
 export default function Home() {
+  useSEO({
+    title: "Productized Growth Marketing for Ambitious Brands",
+    description: "Socialio delivers content, paid acquisition, and SEO as a productized service — no bloated retainers, no agency fluff. Book a free strategy call.",
+    path: "/",
+  });
   const statsRef = useRef<HTMLElement>(null);
   const isInView = useInView(statsRef, { once: true, amount: 0.5 });
   const [activeHeroTab, setActiveHeroTab] = useState(servicesData[0].category || "Social Media");

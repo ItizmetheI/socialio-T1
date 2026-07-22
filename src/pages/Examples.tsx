@@ -2,8 +2,15 @@ import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import AutoplayVideo from "../components/AutoplayVideo";
 import { shortFormVideos, ugcVideos, blogImages, socialImages } from "../data/media";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Examples() {
+  useSEO({
+    title: "Our Work Gallery",
+    description: "Browse real examples of social posts, short-form videos, UGC, and blog content Socialio has produced for clients.",
+    path: "/examples",
+  });
+
   const [activeTab, setActiveTab] = useState("All");
 
   const tabs = [

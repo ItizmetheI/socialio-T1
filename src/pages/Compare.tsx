@@ -1,7 +1,14 @@
 import { Check, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Compare() {
+  useSEO({
+    title: "Compare Socialio vs. Agencies & In-House",
+    description: "See how Socialio's productized model stacks up against traditional marketing agencies and building an in-house team.",
+    path: "/compare",
+  });
+
   return (
     <div className="min-h-screen pt-32 pb-24 px-6 max-w-7xl mx-auto text-on-surface">
       <div className="text-center mb-16">

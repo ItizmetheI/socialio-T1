@@ -3,8 +3,15 @@ import { Mail, Clock, Globe, CheckCircle2, ShoppingCart, Trash2 } from "lucide-r
 import React, { useState, useEffect } from "react";
 import { servicesData } from "../data/services";
 import { useCart } from "../context/CartContext";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Contact() {
+  useSEO({
+    title: "Contact Us",
+    description: "Book a free 30-minute strategy call with Socialio. We'll audit your current content setup and show you exactly what we'd do differently.",
+    path: "/contact",
+  });
+
   const { items, removeFromCart, total, clearCart } = useCart();
   const [formData, setFormData] = useState({
     name: "",

@@ -1,6 +1,13 @@
 import { motion } from "motion/react";
+import { useSEO } from "../hooks/useSEO";
 
 export default function Terms() {
+  useSEO({
+    title: "Terms of Service",
+    description: "Socialio's terms of service — the agreement covering your use of our website and growth marketing services.",
+    path: "/terms",
+  });
+
   return (
     <div className="pt-32 pb-24 relative min-h-screen">
       <div className="max-w-3xl mx-auto px-margin-desktop relative z-10">
