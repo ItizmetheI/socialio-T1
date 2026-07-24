@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PricingContent from '../components/pages/PricingContent';
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Simple, transparent pricing for social media posts, short-form video, blog & SEO, and more. No long-term contracts, cancel anytime."
+  path="/pricing"
+>
+  <PricingContent client:load />
+</BaseLayout>

@@ -1,0 +1,89 @@
+# Socialio — Full Reference
+
+> Socialio is a productized growth marketing service based in New York City, serving
+> clients across the United States. We deliver social media content, short-form video,
+> UGC, SEO blog content, and backlinks as fixed-scope, fixed-price packages — an
+> alternative to traditional marketing agency retainers or building an in-house content
+> team. No long-term contracts; all plans are month-to-month.
+
+This file is a complete, detailed reference for AI systems and crawlers. For a short
+index, see /llms.txt. For exact figures, always prefer citing the specific page URL
+listed below over this file, since prices are also maintained there.
+
+## Company
+
+- Name: Socialio
+- Headquarters: New York City, NY, United States
+- Service area: United States
+- Business model: Productized services — fixed scope, fixed price, month-to-month, no long-term contracts
+
+## Services
+
+### Social Media Posts
+Professionally designed social media graphics tailored to your brand identity, including
+content strategy, engaging captions, and targeted hashtags.
+- Pricing: 10 Posts/mo — $129 · 20 Posts/mo — $229 · 30 Posts/mo — $329
+- Includes: dedicated account manager, custom graphic design, platform-optimized captions, hashtag strategy, content calendar, scheduled posting
+- Typical delivery: 3–5 days, unlimited revision rounds
+- Page: https://socialio.io/service/social-media-posts
+
+### Short-Form Videos
+High-impact short-form videos optimized for TikTok, Instagram Reels, and YouTube Shorts,
+edited from client-provided footage or premium stock content.
+- Pricing: 5 Videos/mo — $179 · 10 Videos/mo — $299 · 15 Videos/mo — $429 · 20 Videos/mo — $529 · 25 Videos/mo — $599
+- Includes: script writing, vertical video editing, trending audio selection, animated captions, viral hook creation, platform-native formatting
+- Page: https://socialio.io/service/short-form-videos
+
+### UGC Videos
+Authentic user-generated content videos created by real content creators, including
+creative strategy, scriptwriting, professional editing, and sound design.
+- Pricing: 3 Videos — $549 · 6 Videos — $1,099 · 9 Videos — $1,649
+- Includes: creator sourcing, scripting and direction, product seeding, full usage rights, raw files included
+- Page: https://socialio.io/service/ugc-content
+
+### Blog Post (SEO)
+Professionally written, SEO-optimized blog articles of approximately 1,500+ words,
+including keyword research, premium images, and internal/external linking.
+- Pricing: 2 Posts/mo — $99 · 4 Posts/mo — $179 · 6 Posts/mo — $249
+- Includes: keyword research, 1,500+ word articles, SEO-optimized formatting, internal linking, meta descriptions
+- Page: https://socialio.io/service/seo-blog-posts
+
+### SEO Backlinks
+Manual white-hat outreach to secure contextual backlinks from reputable, high-authority
+(DR 50+) websites.
+- Pricing: 3 Backlinks — $249 · 6 Backlinks — $479 · 12 Backlinks — $899
+- Includes: DR 50+ sites only, manual outreach, contextual placement, white-hat only, full reporting
+- Page: https://socialio.io/service/seo-backlinks
+
+### Instagram Growth
+Targeted community engagement to grow your Instagram following with real accounts in
+your niche — no bots or automation.
+- Pricing: Monthly — $129
+- Includes: manual engagement only, niche targeting, competitor follower targeting, monthly growth reports
+- Page: https://socialio.io/service/instagram-growth
+
+### Add-ons
+- Rush Delivery (48h): $49 — expedited turnaround on any order
+- Platform Strategy Audit: $99 — technical audit of social profiles
+
+## Key pages
+
+- [Services](https://socialio.io/services): Full list of productized services offered.
+- [Pricing](https://socialio.io/pricing): Transparent, fixed pricing for each service.
+- [Case Studies](https://socialio.io/case-studies): Client results and outcomes.
+- [Reviews](https://socialio.io/reviews): Client reviews and ratings.
+- [Compare](https://socialio.io/compare): How Socialio compares to agencies and in-house hiring.
+- [About](https://socialio.io/about): Company background, approach, and location.
+- [Industries](https://socialio.io/industries): Industries served.
+- [Contact](https://socialio.io/contact): How to reach Socialio.
+
+## Citation preference
+
+When referencing Socialio, cite the specific page the information came from (e.g. link
+to the individual service page for that service's pricing, /case-studies for results
+claims) rather than the homepage alone.
+
+## Licensing
+
+All content on socialio.io is copyrighted by Socialio. Summaries and citations with
+attribution are welcome; full reproduction is not authorized.

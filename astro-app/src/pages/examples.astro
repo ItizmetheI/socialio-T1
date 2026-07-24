@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExamplesContent from '../components/pages/ExamplesContent';
+---
+
+<BaseLayout
+  title="Our Work Gallery"
+  description="Browse real examples of social posts, short-form videos, UGC, and blog content Socialio has produced for clients."
+  path="/examples"
+>
+  <ExamplesContent client:load />
+</BaseLayout>

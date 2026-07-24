@@ -1,0 +1,197 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+import logoIcon from '../assets/logo-icon.png';
+import logoText from '../assets/logo-text.png';
+
+const SITE_URL = 'https://socialio.io';
+const SITE_NAME = 'Socialio';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  hideChrome?: boolean;
+}
+
+const { title, description, path, noindex = false, hideChrome = false } = Astro.props;
+const fullTitle = `${title} | ${SITE_NAME}`;
+const url = `${SITE_URL}${path}`;
+const isHome = path === '/';
+
+// Matches the original AnimatePresence mode="wait": old page fades out for 0.3s,
+// then the new page fades in — sequential, not overlapping.
+const pageFade = {
+  old: { name: 'page-fade-out', duration: '0.3s', easing: 'ease-out', fillMode: 'both' },
+  new: { name: 'page-fade-in', duration: '0.3s', easing: 'ease-out', fillMode: 'both', delay: '0.3s' },
+};
+const pageTransition = { forwards: pageFade, backwards: pageFade };
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{isHome ? title : fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={url} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#050505" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={isHome ? title : fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={isHome ? title : fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Geist:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,-50..200,20..48&display=swap"
+      rel="stylesheet"
+    />
+
+    {isHome && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Socialio',
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon-512.png`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'New York',
+          addressRegion: 'NY',
+          addressCountry: 'US',
+        },
+        areaServed: 'US',
+        sameAs: [
+          'https://www.facebook.com/share/17oA4Peihv/?mibextid=wwXIfr',
+          'https://www.instagram.com/getsocialio',
+        ],
+      })} />
+    )}
+    {!noindex && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: title,
+        headline: title,
+        description,
+        url,
+        isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
+      })} />
+    )}
+    <ClientRouter />
+  </head>
+  <body class="bg-background text-on-surface font-body-md selection:bg-primary/30 selection:text-primary">
+    <div
+      id="site-loader"
+      transition:persist="loader"
+      style="display:none"
+      class="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center gap-5 md:gap-6"
+    >
+      <div class="flex items-center gap-3 md:gap-4">
+        <div id="loader-icon" class="opacity-0">
+          <img src={logoIcon.src} alt="" class="h-10 md:h-14 w-auto" />
+        </div>
+        <div class="overflow-hidden">
+          <img
+            id="loader-wordmark"
+            src={logoText.src}
+            alt="Socialio"
+            class="h-6 md:h-8 w-auto"
+            style="transform: translateX(-105%)"
+          />
+        </div>
+      </div>
+      <div id="loader-underline" class="h-[3px] w-20 md:w-28 bg-primary rounded-full" style="transform: scaleX(0)"></div>
+    </div>
+
+    <div class="min-h-screen flex flex-col bg-background text-on-surface hover:text-white transition-colors duration-500">
+      {!hideChrome && <NavBar currentPath={path} client:load transition:persist="navbar" />}
+      <main class="flex-grow" transition:animate={pageTransition}>
+        <slot />
+      </main>
+      {!hideChrome && <Footer client:idle transition:persist="footer" />}
+    </div>
+
+    <script>
+      import { animate } from 'animejs';
+
+      const loader = document.getElementById('site-loader');
+
+      if (loader && sessionStorage.getItem('socialio-loaded') !== 'true') {
+        sessionStorage.setItem('socialio-loaded', 'true');
+        loader.style.display = 'flex';
+        document.documentElement.style.overflow = 'hidden';
+
+        requestAnimationFrame(() => {
+          animate('#loader-icon', { opacity: [0, 1], scale: [0.8, 1], duration: 500, ease: 'outQuint' });
+
+          animate('#loader-wordmark', {
+            translateX: ['-105%', '0%'],
+            duration: 650,
+            delay: 200,
+            ease: 'outExpo',
+          });
+
+          animate('#loader-underline', {
+            scaleX: [0, 1],
+            duration: 450,
+            delay: 750,
+            ease: 'outQuint',
+          });
+        });
+
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          animate(loader, {
+            opacity: [1, 0],
+            scale: [1, 1.03],
+            filter: ['blur(0px)', 'blur(6px)'],
+            duration: 500,
+            ease: 'inOutQuad',
+            onComplete: () => {
+              loader.style.display = 'none';
+              document.documentElement.style.overflow = '';
+            },
+          });
+        };
+
+        const minTime = new Promise((r) => setTimeout(r, 1300));
+        const ready = new Promise((r) => {
+          if (document.readyState === 'complete') r(undefined);
+          else window.addEventListener('load', () => r(undefined), { once: true });
+        });
+        Promise.all([minTime, ready]).then(finish);
+        setTimeout(finish, 3500);
+      }
+    </script>
+  </body>
+</html>

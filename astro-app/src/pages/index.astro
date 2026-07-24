@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeContent from '../components/pages/HomeContent';
+import { homeFaqs } from '../data/faqs';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Productized Growth Marketing for Ambitious Brands"
+  description="Socialio delivers content, paid acquisition, and SEO as a productized service — no bloated retainers, no agency fluff. Book a free strategy call."
+  path="/"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <HomeContent client:load />
+</BaseLayout>

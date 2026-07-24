@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ClientLoginContent from '../components/pages/ClientLoginContent';
+---
+
+<BaseLayout
+  title="Client Login"
+  description="Sign in to your Socialio client portal."
+  path="/client-login"
+  noindex={true}
+  hideChrome={true}
+>
+  <ClientLoginContent client:load />
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactContent from '../components/pages/ContactContent';
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Book a free 30-minute strategy call with Socialio. We'll audit your current content setup and show you exactly what we'd do differently."
+  path="/contact"
+>
+  <ContactContent client:load />
+</BaseLayout>

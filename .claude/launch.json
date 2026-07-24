@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vite-app (current live site)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "astro-app (migration in progress)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "astro-app", "run", "dev", "--", "--port=4321", "--host=0.0.0.0"],
+      "port": 4321
+    }
+  ]
+}

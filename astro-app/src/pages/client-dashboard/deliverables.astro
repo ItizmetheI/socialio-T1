@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClientDashboardContent from '../../components/pages/ClientDashboardContent';
+---
+
+<BaseLayout
+  title="Deliverables"
+  description="Your Socialio client dashboard."
+  path="/client-dashboard/deliverables"
+  noindex={true}
+  hideChrome={true}
+>
+  <ClientDashboardContent path="/client-dashboard/deliverables" client:load />
+</BaseLayout>

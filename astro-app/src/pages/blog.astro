@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogContent from '../components/pages/BlogContent';
+---
+
+<BaseLayout
+  title="The Growth Log — Blog"
+  description="Tactical teardowns, frameworks, and actionable essays on scaling revenue through content and growth marketing."
+  path="/blog"
+>
+  <BlogContent client:load />
+</BaseLayout>

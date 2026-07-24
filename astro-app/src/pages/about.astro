@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutContent from '../components/pages/AboutContent';
+---
+
+<BaseLayout
+  title="About Us"
+  description="Socialio productizes the marketing agency model — meet the team behind the fast, fixed-price growth engine for ambitious brands."
+  path="/about"
+>
+  <AboutContent client:load />
+</BaseLayout>

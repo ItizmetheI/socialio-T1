@@ -1,0 +1,121 @@
+{
+  "baseUrl": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev",
+  "sections": {
+    "shortFormVideos": {
+      "description": "Used in the Short-Form Videos section of the portfolio / service detail page. Vertical 9:16 format.",
+      "items": [
+        {
+          "id": "ugc-1",
+          "file": "UGC 1.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%201.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        },
+        {
+          "id": "ugc-2",
+          "file": "UGC 2.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%202.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        },
+        {
+          "id": "ugc-3",
+          "file": "UGC 3.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%203.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        },
+        {
+          "id": "ugc-4",
+          "file": "UGC 4.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%204.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        }
+      ]
+    },
+    "ugcSection": {
+      "description": "Used in the UGC Videos section of the portfolio / service detail page. Creator-style authentic videos.",
+      "items": [
+        {
+          "id": "ugc-sc-3",
+          "file": "UGC SC 3.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%20SC%203.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        },
+        {
+          "id": "ugc-sc-4",
+          "file": "UGC SC 4.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/UGC%20SC%204.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "9/16"
+        }
+      ]
+    },
+    "blogPosts": {
+      "description": "Used in the Blog & SEO section of the portfolio. Static images showing blog/article UI.",
+      "items": [
+        {
+          "id": "blog-post-1",
+          "file": "blog post.jpg",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/blog%20post.jpg",
+          "type": "image",
+          "format": "jpg",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "blog-post-2",
+          "file": "blog post 2.jpg",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/blog%20post%202.jpg",
+          "type": "image",
+          "format": "jpg",
+          "aspectRatio": "16/9"
+        }
+      ]
+    },
+    "socialMediaPosts": {
+      "description": "Used in the Social Media Posts section of the portfolio. Mix of static images and video.",
+      "items": [
+        {
+          "id": "social-post-1",
+          "file": "social media post 1.jpg",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/social%20media%20post%20%201.jpg",
+          "type": "image",
+          "format": "jpg",
+          "aspectRatio": "1/1"
+        },
+        {
+          "id": "social-post-2",
+          "file": "social media post 2.jpg",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/social%20media%20post%202.jpg",
+          "type": "image",
+          "format": "jpg",
+          "aspectRatio": "1/1"
+        },
+        {
+          "id": "social-post-3",
+          "file": "social media post 3.jpg",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/social%20media%20post%203.jpg",
+          "type": "image",
+          "format": "jpg",
+          "aspectRatio": "1/1"
+        },
+        {
+          "id": "social-post-4",
+          "file": "social media post 4.mp4",
+          "url": "https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev/social%20media%20post%204.mp4",
+          "type": "video",
+          "format": "mp4",
+          "aspectRatio": "1/1"
+        }
+      ]
+    }
+  }
+}

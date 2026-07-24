@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudiesContent from '../components/pages/CaseStudiesContent';
+---
+
+<BaseLayout
+  title="Case Studies"
+  description="Real results from real clients — see how Socialio's content and growth systems drove measurable revenue across SaaS, e-commerce, and more."
+  path="/case-studies"
+>
+  <CaseStudiesContent client:load />
+</BaseLayout>

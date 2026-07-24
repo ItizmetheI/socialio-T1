@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustriesContent from '../components/pages/IndustriesContent';
+---
+
+<BaseLayout
+  title="Industries We Serve"
+  description="See how Socialio drives growth across SaaS, e-commerce, health & wellness, real estate, travel, and professional services."
+  path="/industries"
+>
+  <IndustriesContent client:load />
+</BaseLayout>

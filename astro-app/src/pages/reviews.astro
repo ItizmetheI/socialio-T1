@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ReviewsContent from '../components/pages/ReviewsContent';
+---
+
+<BaseLayout
+  title="Client Reviews"
+  description="Read verified reviews from companies successfully scaling their content and growth with Socialio."
+  path="/reviews"
+>
+  <ReviewsContent client:load />
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicesContent from '../components/pages/ServicesContent';
+---
+
+<BaseLayout
+  title="Services"
+  description="Productized social media posts, short-form video, UGC, SEO blog content, and backlinks — priced simply, delivered fast."
+  path="/services"
+>
+  <ServicesContent client:load />
+</BaseLayout>
