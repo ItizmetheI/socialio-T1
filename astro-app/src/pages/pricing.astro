@@ -1,6 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingContent from '../components/pages/PricingContent';
+import { servicesData } from '../data/services';
+
+const SITE_URL = 'https://socialio.io';
+const offerCatalogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Socialio Pricing',
+  itemListElement: servicesData.map((service: any) => ({
+    '@type': 'Offer',
+    name: service.title,
+    description: service.description,
+    price: service.sliderSteps[0].price,
+    priceCurrency: 'USD',
+    url: `${SITE_URL}/service/${service.id}`,
+  })),
+};
 ---
 
 <BaseLayout
@@ -8,5 +24,6 @@ import PricingContent from '../components/pages/PricingContent';
   description="Simple, transparent pricing for social media posts, short-form video, blog & SEO, and more. No long-term contracts, cancel anytime."
   path="/pricing"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(offerCatalogSchema)} />
   <PricingContent client:load />
 </BaseLayout>

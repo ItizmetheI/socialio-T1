@@ -22,6 +22,19 @@ const fullTitle = `${title} | ${SITE_NAME}`;
 const url = `${SITE_URL}${path}`;
 const isHome = path === '/';
 
+// Real schema.org subtypes for pages that are more specific than plain WebPage --
+// no invented data, just a more precise @type for what's already there.
+const PAGE_TYPES: Record<string, string> = {
+  '/about': 'AboutPage',
+  '/contact': 'ContactPage',
+  '/blog': 'CollectionPage',
+  '/case-studies': 'CollectionPage',
+  '/examples': 'CollectionPage',
+  '/reviews': 'CollectionPage',
+  '/services': 'CollectionPage',
+};
+const pageType = PAGE_TYPES[path] ?? 'WebPage';
+
 // Matches the original AnimatePresence mode="wait": old page fades out for 0.3s,
 // then the new page fades in — sequential, not overlapping.
 const pageFade = {
@@ -56,11 +69,13 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
     <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE_NAME} — ${title}`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={isHome ? title : fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+    <meta name="twitter:image:alt" content={`${SITE_NAME} — ${title}`} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -97,12 +112,22 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
     {!noindex && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'WebPage',
+        '@type': pageType,
         name: title,
         headline: title,
         description,
         url,
         isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
+      })} />
+    )}
+    {!noindex && !isHome && !path.startsWith('/service/') && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: title, item: url },
+        ],
       })} />
     )}
     <ClientRouter />

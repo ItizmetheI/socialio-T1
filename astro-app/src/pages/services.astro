@@ -1,6 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServicesContent from '../components/pages/ServicesContent';
+import { servicesData } from '../data/services';
+
+const SITE_URL = 'https://socialio.io';
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: servicesData.map((service: any, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: service.title,
+      description: service.description,
+      url: `${SITE_URL}/service/${service.id}`,
+    },
+  })),
+};
 ---
 
 <BaseLayout
@@ -8,5 +25,6 @@ import ServicesContent from '../components/pages/ServicesContent';
   description="Productized social media posts, short-form video, UGC, SEO blog content, and backlinks — priced simply, delivered fast."
   path="/services"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
   <ServicesContent client:load />
 </BaseLayout>
