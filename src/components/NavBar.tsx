@@ -1,33 +1,43 @@
-import { Link, useLocation } from "react-router-dom";
 import { ShoppingBag, ChevronDown, MonitorPlay, Menu, X } from "lucide-react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import CartDrawer from "./CartDrawer";
 import { useState, useEffect } from "react";
 import { servicesData } from "../data/services";
 import logoIcon from "../assets/logo-icon.png";
 import logoText from "../assets/logo-text.png";
+import MagneticButton from "./MagneticButton";
 
-export default function NavBar() {
-  const { pathname } = useLocation();
+const SHOW_CLIENT_PORTAL = import.meta.env.PUBLIC_SHOW_CLIENT_PORTAL === "true";
+
+export default function NavBar({ currentPath: initialPath }: { currentPath: string }) {
   const { items, setIsCartOpen } = useCart();
-  
+
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // transition:persist keeps this component mounted across page navigations,
+  // so `currentPath` (a prop) never updates again after the first swap — track it via the DOM instead.
+  const [currentPath, setCurrentPath] = useState(initialPath);
+
+  useEffect(() => {
+    const syncPath = () => setCurrentPath(window.location.pathname);
+    document.addEventListener("astro:page-load", syncPath);
+    return () => document.removeEventListener("astro:page-load", syncPath);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [pathname]);
+  }, [currentPath]);
 
   const isActive = (path: string) => {
-    return pathname === path 
-      ? "text-primary font-bold pb-1 font-label-md text-label-md" 
+    return currentPath === path
+      ? "text-primary font-bold pb-1 font-label-md text-label-md"
       : "text-on-surface/70 font-body-md hover:text-primary transition-colors duration-300 font-label-md text-label-md";
   };
 
   const isMobileActive = (path: string) => {
-    return pathname === path 
-      ? "text-primary font-bold block" 
+    return currentPath === path
+      ? "text-primary font-bold block"
       : "text-on-surface-variant hover:text-white block transition-colors duration-300";
   };
 
@@ -38,36 +48,36 @@ export default function NavBar() {
         onMouseLeave={() => setActiveDropdown(null)}
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoIcon} alt="" className="h-9 w-auto" />
-            <img src={logoText} alt="Socialio" className="h-4 w-auto" />
-          </Link>
+          <a href="/" className="flex items-center gap-2">
+            <img src={logoIcon.src} alt="" className="h-9 w-auto" />
+            <img src={logoText.src} alt="Socialio" className="h-4 w-auto" />
+          </a>
           <div className="hidden md:flex items-center gap-8 relative">
-            <Link to="/" className={isActive("/")}>Home</Link>
-            
+            <a href="/" className={isActive("/")}>Home</a>
+
             {/* Services Mega Menu Toggle */}
-            <Link
-              to="/services"
-              className={`flex items-center gap-1 transition-colors ${activeDropdown === 'services' || pathname.startsWith('/service') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary'}`}
+            <a
+              href="/services"
+              className={`flex items-center gap-1 transition-colors ${activeDropdown === 'services' || currentPath.startsWith('/service') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary'}`}
               onMouseEnter={() => setActiveDropdown('services')}
             >
               Services <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'services' ? 'rotate-180' : ''}`} />
-            </Link>
+            </a>
 
-            <Link to="/case-studies" className={isActive("/case-studies")}>Case Studies</Link>
+            <a href="/case-studies" className={isActive("/case-studies")}>Case Studies</a>
 
             {/* Company Mega Menu Toggle */}
-            <Link
-              to="/about"
+            <a
+              href="/about"
               className={`flex items-center gap-1 transition-colors ${activeDropdown === 'company' ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary'}`}
               onMouseEnter={() => setActiveDropdown('company')}
             >
               Company <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'company' ? 'rotate-180' : ''}`} />
-            </Link>
-            <Link to="/pricing" className={isActive("/pricing")}>Pricing</Link>
+            </a>
+            <a href="/pricing" className={isActive("/pricing")}>Pricing</a>
           </div>
           <div className="flex items-center gap-4 md:gap-6">
-            <button 
+            <button
               onClick={() => setIsCartOpen(true)}
               className="relative text-on-surface-variant hover:text-primary transition-colors group"
             >
@@ -78,15 +88,15 @@ export default function NavBar() {
                 </span>
               )}
             </button>
-            {(import.meta as any).env.VITE_SHOW_CLIENT_PORTAL === 'true' && (
-              <Link to="/client-login" className="hidden border border-white/10 md:inline-block bg-white text-black px-6 py-2 rounded-xl font-bold text-sm transition-all duration-300 hover:bg-gray-200">
+            {SHOW_CLIENT_PORTAL && (
+              <a href="/client-login" className="hidden border border-white/10 md:inline-block bg-white text-black px-6 py-2 rounded-xl font-bold text-sm transition-all duration-300 hover:bg-gray-200">
                 Log in
-              </Link>
+              </a>
             )}
-            <Link to="/contact" className="hidden md:inline-block accent-gradient-button px-6 py-2 rounded-xl font-bold text-sm">
+            <MagneticButton href="/contact" className="hidden md:inline-block accent-gradient-button px-6 py-2 rounded-xl font-bold text-sm">
               Get Started
-            </Link>
-            <button 
+            </MagneticButton>
+            <button
               className="md:hidden text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -103,13 +113,13 @@ export default function NavBar() {
                    <div className="lg:col-span-1 border-r border-white/5 pr-8">
                       <h4 className="font-mono text-xs text-primary uppercase tracking-widest font-bold mb-4">Core Services</h4>
                       <p className="font-sans text-on-surface-variant text-sm leading-relaxed mb-6">Explore our productized growth solutions designed to scale your operations instantly.</p>
-                      <Link to="/services" className="text-sm font-bold text-white hover:text-primary transition-colors flex items-center gap-2" onClick={() => setActiveDropdown(null)}>View All Services &rarr;</Link>
+                      <a href="/services" className="text-sm font-bold text-white hover:text-primary transition-colors flex items-center gap-2" onClick={() => setActiveDropdown(null)}>View All Services &rarr;</a>
                    </div>
                    <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-y-6 gap-x-8">
                      {servicesData.map(service => (
-                       <Link 
-                         key={service.id} 
-                         to={`/service/${service.id}`} 
+                       <a
+                         key={service.id}
+                         href={`/service/${service.id}`}
                          onClick={() => setActiveDropdown(null)}
                          className="group block"
                        >
@@ -118,29 +128,29 @@ export default function NavBar() {
                            {service.title}
                          </h5>
                          <p className="font-sans text-xs text-on-surface-variant line-clamp-2">{service.description}</p>
-                       </Link>
+                       </a>
                      ))}
                    </div>
                 </div>
               )}
               {activeDropdown === 'company' && (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                   <Link to="/about" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                   <a href="/about" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                       <h3 className="font-display text-lg font-bold text-white mb-2">About Us</h3>
                       <p className="text-sm text-on-surface-variant font-sans">Learn about our mission to productize the marketing agency model.</p>
-                   </Link>
-                   <Link to="/industries" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                   </a>
+                   <a href="/industries" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                       <h3 className="font-display text-lg font-bold text-white mb-2">Industries We Serve</h3>
                       <p className="text-sm text-on-surface-variant font-sans">See how we drive scale in SaaS, E-com, Health, and more.</p>
-                   </Link>
-                   <Link to="/reviews" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                   </a>
+                   <a href="/reviews" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                       <h3 className="font-display text-lg font-bold text-white mb-2">Client Reviews</h3>
                       <p className="text-sm text-on-surface-variant font-sans">Read verified reviews from companies successfully scaling with us.</p>
-                   </Link>
-                   <Link to="/compare" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                   </a>
+                   <a href="/compare" onClick={() => setActiveDropdown(null)} className="group bg-background p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                       <h3 className="font-display text-lg font-bold text-white mb-2">Compare The Alternative</h3>
                       <p className="text-sm text-on-surface-variant font-sans">See why hiring us beats traditional agencies and in-house roles.</p>
-                   </Link>
+                   </a>
                 </div>
               )}
            </div>
@@ -149,21 +159,21 @@ export default function NavBar() {
         {/* Mobile Menu Drawer */}
         <div className={`md:hidden absolute top-full left-0 w-full bg-surface-container border-b border-white/10 shadow-2xl transition-all duration-300 overflow-hidden origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100 h-[calc(100vh-80px)] overflow-y-auto' : 'opacity-0 scale-y-0 h-0 pointer-events-none'}`}>
            <div className="px-6 py-8 flex flex-col gap-6">
-              <Link to="/" className={isMobileActive("/")}>Home</Link>
-              <Link to="/services" className={isMobileActive("/services")}>Services</Link>
-              <Link to="/case-studies" className={isMobileActive("/case-studies")}>Case Studies</Link>
-              <Link to="/about" className={isMobileActive("/about")}>Company</Link>
-              <Link to="/pricing" className={isMobileActive("/pricing")}>Pricing</Link>
-              
+              <a href="/" className={isMobileActive("/")}>Home</a>
+              <a href="/services" className={isMobileActive("/services")}>Services</a>
+              <a href="/case-studies" className={isMobileActive("/case-studies")}>Case Studies</a>
+              <a href="/about" className={isMobileActive("/about")}>Company</a>
+              <a href="/pricing" className={isMobileActive("/pricing")}>Pricing</a>
+
               <div className="h-[1px] bg-white/10 my-2 w-full"></div>
-              
-              <Link to="/contact" className="text-center accent-gradient-button px-6 py-3 rounded-xl font-bold text-sm">
+
+              <a href="/contact" className="text-center accent-gradient-button px-6 py-3 rounded-xl font-bold text-sm">
                 Get Started
-              </Link>
-              {(import.meta as any).env.VITE_SHOW_CLIENT_PORTAL === 'true' && (
-                <Link to="/client-login" className="text-center border border-white/20 bg-transparent text-white px-6 py-3 rounded-xl font-bold text-sm">
+              </a>
+              {SHOW_CLIENT_PORTAL && (
+                <a href="/client-login" className="text-center border border-white/20 bg-transparent text-white px-6 py-3 rounded-xl font-bold text-sm">
                   Log in
-                </Link>
+                </a>
               )}
            </div>
         </div>

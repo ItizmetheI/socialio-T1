@@ -1,6 +1,5 @@
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import { X, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
-import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 
 export default function CartDrawer() {
@@ -10,14 +9,14 @@ export default function CartDrawer() {
     <AnimatePresence>
       {isCartOpen && (
         <>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             onClick={() => setIsCartOpen(false)}
           />
-          <motion.div 
+          <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -28,14 +27,14 @@ export default function CartDrawer() {
               <h2 className="font-sans text-xl font-bold text-white flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5" /> Your Cart
               </h2>
-              <button 
+              <button
                 onClick={() => setIsCartOpen(false)}
                 className="p-2 hover:bg-white/10 rounded-full transition-colors text-on-surface-variant hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-    
+
             <div className="flex-1 overflow-y-auto p-6">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
@@ -43,7 +42,7 @@ export default function CartDrawer() {
                     <ShoppingBag className="w-8 h-8 text-on-surface-variant opacity-50" />
                   </div>
                   <p className="font-sans text-on-surface-variant mb-4">Your cart is currently empty.</p>
-                  <button 
+                  <button
                     onClick={() => setIsCartOpen(false)}
                     className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors font-sans text-sm font-bold"
                   >
@@ -64,7 +63,7 @@ export default function CartDrawer() {
                            {item.levelLabel} {item.type === 'service' ? '/mo' : ''}
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => removeFromCart(item.id)}
                         className="absolute right-4 bottom-4 p-1.5 text-on-surface-variant hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                       >
@@ -75,21 +74,21 @@ export default function CartDrawer() {
                 </div>
               )}
             </div>
-    
+
             {items.length > 0 && (
               <div className="p-6 border-t border-white/5 bg-surface-container-low">
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-sans text-on-surface-variant">Estimated Monthly Total</span>
                   <span className="font-sans text-2xl font-black text-white">${total}</span>
                 </div>
-                
-                <Link 
-                  to="/contact" 
+
+                <a
+                  href="/contact"
                   onClick={() => setIsCartOpen(false)}
                   className="w-full py-4 bg-white text-black hover:bg-white/90 font-sans text-sm font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] flex justify-center items-center gap-2"
                 >
                   Proceed to Checkout <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
                 <p className="text-center font-sans text-xs text-on-surface-variant mt-4">
                   No payment required right now. We'll finalize your stack on our intro call.
                 </p>
