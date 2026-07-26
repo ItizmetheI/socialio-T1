@@ -60,6 +60,8 @@ export default function NavBar({ currentPath: initialPath }: { currentPath: stri
               href="/services"
               className={`flex items-center gap-1 transition-colors ${activeDropdown === 'services' || currentPath.startsWith('/service') ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary'}`}
               onMouseEnter={() => setActiveDropdown('services')}
+              onFocus={() => setActiveDropdown('services')}
+              aria-expanded={activeDropdown === 'services'}
             >
               Services <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'services' ? 'rotate-180' : ''}`} />
             </a>
@@ -71,6 +73,8 @@ export default function NavBar({ currentPath: initialPath }: { currentPath: stri
               href="/about"
               className={`flex items-center gap-1 transition-colors ${activeDropdown === 'company' ? 'text-primary font-bold' : 'text-on-surface-variant hover:text-primary'}`}
               onMouseEnter={() => setActiveDropdown('company')}
+              onFocus={() => setActiveDropdown('company')}
+              aria-expanded={activeDropdown === 'company'}
             >
               Company <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'company' ? 'rotate-180' : ''}`} />
             </a>
@@ -79,6 +83,7 @@ export default function NavBar({ currentPath: initialPath }: { currentPath: stri
           <div className="flex items-center gap-4 md:gap-6">
             <button
               onClick={() => setIsCartOpen(true)}
+              aria-label="Open cart"
               className="relative text-on-surface-variant hover:text-primary transition-colors group"
             >
               <ShoppingBag className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -99,6 +104,8 @@ export default function NavBar({ currentPath: initialPath }: { currentPath: stri
             <button
               className="md:hidden text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -106,7 +113,10 @@ export default function NavBar({ currentPath: initialPath }: { currentPath: stri
         </div>
 
         {/* Mega Menus Dropdowns directly attached to navbar for seamless hovering */}
-        <div className={`hidden md:block absolute top-full left-0 w-full bg-surface-container border-b border-white/10 shadow-2xl transition-all duration-300 overflow-hidden origin-top ${activeDropdown ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 h-0 pointer-events-none'}`}>
+        <div
+          className={`hidden md:block absolute top-full left-0 w-full bg-surface-container border-b border-white/10 shadow-2xl transition-all duration-300 overflow-hidden origin-top ${activeDropdown ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 h-0 pointer-events-none'}`}
+          onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setActiveDropdown(null); }}
+        >
            <div className="max-w-7xl mx-auto px-6 py-8" onMouseLeave={() => setActiveDropdown(null)}>
               {activeDropdown === 'services' && (
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

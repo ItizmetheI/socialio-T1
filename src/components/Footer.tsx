@@ -66,19 +66,19 @@ export default function Footer() {
                        <CheckCircle2 className="w-5 h-5" /> You're in. Growth incoming.
                      </div>
                    ) : (
-                     <div className="flex gap-2">
+                     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="flex gap-2">
                        <input
                          type="email"
                          placeholder="Email address"
+                         aria-label="Email address"
                          value={email}
                          onChange={(e) => setEmail(e.target.value)}
-                         onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                          className="bg-background border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-primary flex-grow"
                        />
-                       <button onClick={handleSubmit} disabled={subscribing} className="bg-white text-black p-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-60">
+                       <button type="submit" disabled={subscribing} aria-label="Subscribe" className="bg-white text-black p-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-60">
                          <ArrowRight className="w-4 h-4" />
                        </button>
-                     </div>
+                     </form>
                    )}
                 </div>
                 <div className="flex items-center gap-4 text-on-surface-variant">

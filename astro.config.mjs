@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import path from 'path';
 
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
@@ -21,10 +20,5 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve('.'),
-      },
-    },
   },
 });

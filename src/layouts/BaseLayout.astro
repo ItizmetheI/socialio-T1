@@ -19,7 +19,9 @@ interface Props {
 
 const { title, description, path, noindex = false, hideChrome = false } = Astro.props;
 const fullTitle = `${title} | ${SITE_NAME}`;
-const url = `${SITE_URL}${path}`;
+// Trailing slash matches @astrojs/sitemap's own output (astro.config.mjs) --
+// without this, canonical/og:url disagreed with sitemap.xml on every non-home page.
+const url = `${SITE_URL}${path}${path.endsWith('/') ? '' : '/'}`;
 const isHome = path === '/';
 
 // Real schema.org subtypes for pages that are more specific than plain WebPage --
@@ -80,14 +82,6 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://pub-d152129bb8e0476fa022e067d57269d7.r2.dev" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Geist:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,-50..200,20..48&display=swap"
-      rel="stylesheet"
-    />
 
     {isHome && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify({

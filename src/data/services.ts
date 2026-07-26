@@ -73,7 +73,7 @@ export const servicesData = [
   },
   {
     id: "seo-blog-posts",
-    title: "Blog Post",
+    title: "SEO Blog Posts",
     category: "SEO",
     description: "Professionally written, SEO-optimized blog articles of approximately 1,500+ words, designed to improve search rankings and drive organic traffic.",
     longDescription: "Each post includes keyword research, strategic topic selection, premium images, and relevant internal and external links to maximize visibility.",

@@ -1,9 +1,19 @@
+import { useEffect } from "react";
 import { useCart } from "../hooks/useCart";
 import { X, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 export default function CartDrawer() {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, total } = useCart();
+
+  useEffect(() => {
+    if (!isCartOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsCartOpen(false);
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [isCartOpen, setIsCartOpen]);
 
   return (
     <AnimatePresence>
@@ -22,6 +32,9 @@ export default function CartDrawer() {
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
             className="fixed inset-y-0 right-0 w-full md:w-[450px] bg-surface border-l border-white/5 z-50 flex flex-col shadow-2xl"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/5">
               <h2 className="font-sans text-xl font-bold text-white flex items-center gap-2">
@@ -29,6 +42,7 @@ export default function CartDrawer() {
               </h2>
               <button
                 onClick={() => setIsCartOpen(false)}
+                aria-label="Close cart"
                 className="p-2 hover:bg-white/10 rounded-full transition-colors text-on-surface-variant hover:text-white"
               >
                 <X className="w-5 h-5" />

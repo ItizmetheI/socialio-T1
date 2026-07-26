@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Sparkles, Image, Video, UserSquare2, ArrowUpRight, MonitorPlay, CheckCircle2, Star, ChevronDown } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { servicesData } from "../../data/services";
@@ -13,6 +13,7 @@ import ParallaxBlob from "../ParallaxBlob";
 import { usePointerCapability } from "../../hooks/usePointerCapability";
 import MediaLightbox, { type LightboxItem } from "../MediaLightbox";
 import ImageWithSkeleton from "../ImageWithSkeleton";
+import GuaranteeGauge from "../GuaranteeGauge";
 
 const socialImageOnly = socialImages.filter((i: any) => i.type !== 'video');
 
@@ -184,27 +185,6 @@ export default function HomeContent() {
       }
     : {};
 
-  const guaranteeRef = useRef<HTMLDivElement>(null);
-  const guaranteeInView = useInView(guaranteeRef, { once: true, amount: 0.5 });
-  const [guaranteeDay, setGuaranteeDay] = useState(0);
-
-  useEffect(() => {
-    if (!guaranteeInView) return;
-
-    let current = 0;
-    const target = 14;
-    const duration = 800; // ms
-    const tickMs = Math.ceil(duration / target);
-
-    const timer = setInterval(() => {
-      current++;
-      setGuaranteeDay(current);
-      if (current >= target) clearInterval(timer);
-    }, tickMs);
-
-    return () => clearInterval(timer);
-  }, [guaranteeInView]);
-
   const faqs = homeFaqs;
 
   // Get unique categories for tabs
@@ -232,7 +212,7 @@ export default function HomeContent() {
             <div className="flex items-center gap-2.5 mb-5 opacity-80">
               <div className="flex -space-x-2">
                 {[1,2,3,4,5].map(i => (
-                  <div key={i} className={`w-6 h-6 rounded-full border-2 border-background bg-surface-container flex items-center justify-center overflow-hidden z-[${5-i}]`}>
+                  <div key={i} style={{ zIndex: 5 - i }} className="w-6 h-6 rounded-full border-2 border-background bg-surface-container flex items-center justify-center overflow-hidden">
                      <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="" className="w-full h-full object-cover" />
                   </div>
                 ))}
@@ -505,7 +485,10 @@ export default function HomeContent() {
                       key={item.id}
                       className="rounded-xl overflow-hidden relative group/img aspect-square border border-white/5 cursor-pointer"
                       {...hoverPreviewHandlers}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => setLightboxItem({ url: item.url, type: item.type === "video" ? "video" : "image", alt: `Social media post example ${i + 1}` })}
+                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLightboxItem({ url: item.url, type: item.type === "video" ? "video" : "image", alt: `Social media post example ${i + 1}` }); } }}
                     >
                       {item.type === "video"
                         ? <AutoplayVideo src={item.url} autoPlayInView={!canHover} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
@@ -543,7 +526,10 @@ export default function HomeContent() {
                       key={i}
                       className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black cursor-pointer"
                       {...hoverPreviewHandlers}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => setLightboxItem({ url: item.url, type: "video", alt: `Short-form video example ${i + 1}` })}
+                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLightboxItem({ url: item.url, type: "video", alt: `Short-form video example ${i + 1}` }); } }}
                     >
                       <AutoplayVideo
                         src={item.url}
@@ -581,7 +567,10 @@ export default function HomeContent() {
                      <div
                        key={i}
                        className="rounded-xl overflow-hidden relative group/img aspect-video border border-white/5 bg-black cursor-pointer"
+                       role="button"
+                       tabIndex={0}
                        onClick={() => setLightboxItem({ url: item.url, type: "image", alt: `Blog and SEO content example ${i + 1}` })}
+                       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLightboxItem({ url: item.url, type: "image", alt: `Blog and SEO content example ${i + 1}` }); } }}
                      >
                         <ImageWithSkeleton src={item.url} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt={`Blog and SEO content example ${i + 1}`} />
                      </div>
@@ -616,7 +605,10 @@ export default function HomeContent() {
                      key={i}
                      className="rounded-xl overflow-hidden relative group/vid aspect-[9/16] border border-white/5 bg-black cursor-pointer"
                      {...hoverPreviewHandlers}
+                     role="button"
+                     tabIndex={0}
                      onClick={() => setLightboxItem({ url: item.url, type: "video", alt: `UGC video example ${i + 1}` })}
+                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLightboxItem({ url: item.url, type: "video", alt: `UGC video example ${i + 1}` }); } }}
                    >
                      <AutoplayVideo
                        src={item.url}
@@ -683,7 +675,7 @@ export default function HomeContent() {
           </div>
 
           {/* Money Back Guarantee Block */}
-          <div ref={guaranteeRef} className="mt-20 max-w-5xl mx-auto bg-surface-container border border-white/10 rounded-[2rem] p-8 md:p-14 relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12 group/card">
+          <div className="mt-20 max-w-5xl mx-auto bg-surface-container border border-white/10 rounded-[2rem] p-8 md:p-14 relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12 group/card">
              <ParallaxBlob className="absolute right-0 top-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none group-hover/card:bg-primary/20 transition-colors duration-1000" />
 
              <div className="max-w-xl z-10 text-left">
@@ -709,20 +701,7 @@ export default function HomeContent() {
                  </div>
                </div>
             </div>
-                    <div className="w-full max-w-[280px] shrink-0 z-10 relative hidden md:block">
-               {/* Tech Dial Gauge */}
-               <div className="relative w-64 h-64 rounded-[2rem] flex flex-col items-center justify-center mx-auto">
-                  <div className="absolute inset-0 bg-primary/10 rounded-[2rem] blur-[40px] scale-75 -z-10 animate-pulse" />
-                  <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 200 200">
-                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-white/5" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="0" />
-                     <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="6" className="text-primary transition-all duration-200 ease-linear" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={534 * (1 - guaranteeDay / 14)} />
-                  </svg>
-                  <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wide mb-2 shadow-sm animate-pulse text-center leading-tight px-8 w-full">Money Back Guaranteed</span>
-                  <span className="font-display text-8xl md:text-9xl font-bold text-white tracking-tighter shadow-lg">
-                    <SlidingNumber value={guaranteeDay} />
-                  </span>
-               </div>
-            </div>
+                    <GuaranteeGauge />
           </div>
 
 
@@ -741,12 +720,16 @@ export default function HomeContent() {
               <div key={index} className="border-b border-white/5">
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full py-6 flex items-center justify-between text-left group"
                 >
                   <span className="font-display font-bold text-white text-lg lg:text-xl group-hover:text-primary transition-colors pr-8">{faq.question}</span>
                   <ChevronDown className={`w-5 h-5 text-on-surface-variant flex-shrink-0 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
                 </button>
                 <div
+                  id={`faq-answer-${index}`}
+                  aria-hidden={openFaq !== index}
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 opacity-100 mb-6' : 'max-h-0 opacity-0'}`}
                 >
                   <p className="text-on-surface-variant font-sans text-sm leading-relaxed max-w-2xl">{faq.answer}</p>
