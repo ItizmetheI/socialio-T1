@@ -8,5 +8,7 @@ import CompareContent from '../components/pages/CompareContent';
   description="See how Socialio's productized model stacks up against traditional marketing agencies and building an in-house team."
   path="/compare"
 >
-  <CompareContent client:load />
+  {/* No client: directive -- this component is pure static JSX (no state, no
+      motion, icons render as inline SVG server-side), so it ships zero JS. */}
+  <CompareContent />
 </BaseLayout>
