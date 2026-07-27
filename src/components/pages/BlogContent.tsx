@@ -7,20 +7,21 @@ const WEB3FORMS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 
 export default function BlogContent() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleNewsletterSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail.includes("@")) return;
 
+    // Don't claim someone subscribed when their address went nowhere.
     if (!WEB3FORMS_KEY) {
-      setNewsletterStatus("success");
+      setNewsletterStatus("error");
       return;
     }
 
     setNewsletterStatus("submitting");
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,10 +31,11 @@ export default function BlogContent() {
           email: newsletterEmail
         })
       });
+      if (!res.ok) throw new Error("subscribe failed");
+      setNewsletterStatus("success");
     } catch {
-      // fail silently; treat as success from the visitor's perspective
+      setNewsletterStatus("error");
     }
-    setNewsletterStatus("success");
   };
 
   const posts = [
@@ -219,7 +221,13 @@ export default function BlogContent() {
                     {newsletterStatus === "submitting" ? "Subscribing..." : "Subscribe"}
                   </button>
                 </form>
-                <p className="text-[11px] text-on-surface-variant mt-3 text-center sm:text-left">No spam. Unsubscribe anytime.</p>
+                {newsletterStatus === "error" ? (
+                  <p className="text-[11px] text-red-400 mt-3 text-center sm:text-left">
+                    Couldn't sign you up just now — email support@socialio.io and we'll add you.
+                  </p>
+                ) : (
+                  <p className="text-[11px] text-on-surface-variant mt-3 text-center sm:text-left">No spam. Unsubscribe anytime.</p>
+                )}
               </>
             )}
           </div>

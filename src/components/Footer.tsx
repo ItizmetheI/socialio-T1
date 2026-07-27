@@ -13,18 +13,21 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const handleSubmit = async () => {
     if (!email.includes("@")) return;
 
+    // Don't show "You're in" when the address went nowhere.
     if (!WEB3FORMS_KEY) {
-      setSubmitted(true);
+      setFailed(true);
       return;
     }
 
     setSubscribing(true);
+    setFailed(false);
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,11 +37,12 @@ export default function Footer() {
           email
         })
       });
+      if (!res.ok) throw new Error("subscribe failed");
+      setSubmitted(true);
     } catch {
-      // fail silently in the footer widget; the email address is simply lost this one time
+      setFailed(true);
     } finally {
       setSubscribing(false);
-      setSubmitted(true);
     }
   };
 
@@ -79,6 +83,11 @@ export default function Footer() {
                          <ArrowRight className="w-4 h-4" />
                        </button>
                      </form>
+                   )}
+                   {failed && !submitted && (
+                     <p className="text-[11px] text-red-400 mt-3">
+                       Couldn't sign you up just now — email support@socialio.io and we'll add you.
+                     </p>
                    )}
                 </div>
                 <div className="flex items-center gap-4 text-on-surface-variant">

@@ -28,9 +28,13 @@ export default function ContactContent() {
     }
     setError("");
 
+    // NEVER fake success here. This previously showed "Message sent" and threw
+    // the enquiry away when the key was unset -- which is exactly what happened
+    // in production, silently losing every inbound lead. A visible failure that
+    // hands the user a working email address is always better than a cheerful
+    // lie, because the lead survives.
     if (!WEB3FORMS_KEY) {
-      setStatus("success");
-      clearCart();
+      setError("Our contact form isn't available right now. Please email us directly at support@socialio.io and we'll get straight back to you.");
       return;
     }
 
