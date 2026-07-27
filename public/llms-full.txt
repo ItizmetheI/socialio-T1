@@ -71,7 +71,7 @@ your niche — no bots or automation.
 - [Services](https://socialio.io/services): Full list of productized services offered.
 - [Pricing](https://socialio.io/pricing): Transparent, fixed pricing for each service.
 - [Case Studies](https://socialio.io/case-studies): Client results and outcomes.
-- [Reviews](https://socialio.io/reviews): Verified client reviews and ratings.
+- [Reviews](https://socialio.io/reviews): Client reviews and ratings.
 - [Compare](https://socialio.io/compare): How Socialio compares to agencies and in-house hiring.
 - [About](https://socialio.io/about): Company background, approach, and location.
 - [Industries](https://socialio.io/industries): Industries served.
