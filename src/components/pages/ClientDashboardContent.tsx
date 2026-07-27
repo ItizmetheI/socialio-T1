@@ -4,10 +4,23 @@ import { LayoutDashboard, Package, FileText, CreditCard, LifeBuoy, LogOut, Check
 import logoIcon from '../../assets/logo-icon.png';
 import logoText from '../../assets/logo-text.png';
 
+// ---------------------------------------------------------------------------
+// NON-FUNCTIONAL DEMO -- placeholder portal UI, not a real client dashboard.
+//
+// Every figure rendered below (services, deliverables, invoices, support
+// tickets) is hardcoded placeholder content. Nothing is fetched, nothing is
+// user-specific, and no customer data of any kind exists behind this screen.
+// The localStorage check below is a UI convenience so the demo flows from the
+// login mockup -- it is NOT a security control and does not protect anything.
+// Route is noindex. See ClientLoginContent.tsx for the full notice.
+//
+// !! REPLACE WITH REAL SERVER-SIDE AUTH BEFORE RENDERING ANY REAL CLIENT DATA.
+// ---------------------------------------------------------------------------
 export default function ClientDashboardContent({ path }: { path: string }) {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
+    // Demo gate only -- see the notice above. Not a security boundary.
     if (localStorage.getItem('isClientLoggedIn') === 'true') {
       setAuthorized(true);
     } else {

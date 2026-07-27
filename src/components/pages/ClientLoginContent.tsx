@@ -4,12 +4,30 @@ import { ArrowRight, Lock, Mail, Quote, LayoutDashboard, Zap } from 'lucide-reac
 import logoIcon from '../../assets/logo-icon.png';
 import logoText from '../../assets/logo-text.png';
 
+// ---------------------------------------------------------------------------
+// NON-FUNCTIONAL DEMO -- this is a UI mockup, NOT a real login.
+//
+// There is deliberately no authentication here: no backend, no API call, no
+// credential check. Any email/password "succeeds" and simply flips a
+// localStorage flag. The dashboard it leads to renders hardcoded placeholder
+// content (see ClientDashboardContent.tsx) -- there is no customer data,
+// billing data, or private information anywhere behind this screen, so there
+// is nothing here to breach. Both routes are also marked noindex.
+//
+// It exists so prospective clients can preview what the portal will look like.
+//
+// !! BEFORE WIRING ANY REAL CLIENT DATA TO THE DASHBOARD, THIS MUST BE
+// !! REPLACED WITH REAL SERVER-SIDE AUTHENTICATION. As written, this check is
+// !! trivially bypassed by setting a localStorage value in devtools -- which is
+// !! acceptable only because it currently guards nothing of value.
+// ---------------------------------------------------------------------------
 export default function ClientLoginContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
+    // Demo only -- see the notice above. Not an auth check.
     localStorage.setItem('isClientLoggedIn', 'true');
     window.location.href = '/client-dashboard';
   };
