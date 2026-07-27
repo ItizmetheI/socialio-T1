@@ -5,9 +5,12 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://socialio.io',
+
   integrations: [
     react(),
     sitemap({
@@ -18,7 +21,10 @@ export default defineConfig({
       serialize: (item) => ({ url: item.url, lastmod: new Date().toISOString() }),
     }),
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
